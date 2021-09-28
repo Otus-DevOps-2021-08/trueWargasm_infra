@@ -1,10 +1,4 @@
-# trueWargasm_infra
-
-trueWargasm Infra repository
-
-## Reddit instance deploy
-
-```
+#!/bin/sh
 yc compute instance create \
   --name reddit-app \
   --hostname reddit-app \
@@ -14,5 +8,3 @@ yc compute instance create \
   --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 \
   --metadata serial-port-enable=1 \
   --metadata-from-file user-data=app-config.yml
-```
-``` $ ./start_application.sh ```

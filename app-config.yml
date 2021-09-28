@@ -1,0 +1,29 @@
+#cloud-config
+users:
+  - default
+  - name: wargasm
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    shell: /bin/bash
+    groups: sudo
+    lock_passwd: true
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDC9NugypTNDyt7pqAlQPE3Lf10sx3/UwTajBNeKOvdvlLMtfjFWaLPL+jt2LGoWsB2l0haSTEFuowsBQiUL6ecXDONJvjDkwKi6LBiYo7atrNxeggMj3g9kGKZHEnIwVBXwpXzO8+cmT21eoyHL2Jjpo+6yBALDPZYCuhjsTLf+GH9owGHCvqcpReQ2CG06qrJQlaqwLeggzxae44iWrx/h1StFIFJM3aOfgJ0SNSCurAd3NCDcWKfRXmg/DZGzY4o0QkPTSZ3hp49RfW2/1Vv7U81Jr7BViEPmC7AsEG0yskfwzTZEj7X6V15dgFsuCDbd/b0KgEGeGzThlosx9k3uYH4G/F9aPmPElt1L9O7BlzbGTvDggFDaIgs2F+dw9sw3oZ+PgH1fdqvd0UZBzY6Foqsrs99BSBCgTD3+T+ooiubmwkCpPSvzyPo9eNx+bLyv2hUY2KvAtvCEKiefdSvm734Jh8zK/oW5LZQk8sAQgoRsg9aa24vfwOCsZOZDYE= wargasm
+runcmd:
+  #homedir
+  - cd ~
+  # ruby and bundler install
+  - sudo apt-get update
+  - sudo apt-get install -y ruby-full ruby-bundler build-essential
+  - echo "ruby ok"
+  # mongo install
+  - wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+  - echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+  - sudo apt-get update
+  - sudo apt-get install -y mongodb-org
+  - sudo systemctl start mongod
+  - sudo systemctl enable mongod
+  # application deploy
+  - sudo apt-get install -y git
+  - git clone -b monolith https://github.com/express42/reddit.git
+  - cd reddit && bundle install
+  - puma -d
