@@ -16,3 +16,7 @@ yc compute instance create \
   --metadata-from-file user-data=app-config.yml
 ```
 ``` $ ./start_application.sh ```
+
+testapp_IP = 62.84.114.194
+
+testapp_port = 9292
