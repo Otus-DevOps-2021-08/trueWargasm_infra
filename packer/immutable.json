@@ -1,0 +1,35 @@
+{
+    "builders": [
+        {
+            "type": "yandex",
+            "service_account_key_file": "{{user `key_file`}}",
+            "folder_id": "{{user `folder_id`}}",
+            "source_image_family": "{{user `image_id`}}",
+            "source_image_id" : "{{user `source_image`}}",
+            "image_name": "reddit-full-{{timestamp}}",
+            "image_family": "reddit-full",
+            "ssh_username": "ubuntu",
+            "platform_id": "standard-v3",
+            "instance_cores": "{{user `cpu_cores`}}",
+            "instance_mem_gb": "{{user `ram`}}",
+            "use_ipv4_nat": true
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "files/install_app.sh",
+            "execute_command": "sudo {{.Path}}"
+        },
+        {
+            "type": "shell",
+            "script": "files/setup_app.sh",
+            "execute_command": "{{.Path}}"
+        },
+        {
+            "type": "shell",
+            "script": "files/enable_app.sh",
+            "execute_command": "sudo {{.Path}}"
+        }
+    ]
+}
