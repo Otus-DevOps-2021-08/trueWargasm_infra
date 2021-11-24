@@ -1,29 +1,17 @@
-# trueWargasm_infra
-trueWargasm Infra repository
+# Домашнее задание 7
 
-Для доступа во внутреннюю VM с одной командой можно добавить конфиг SSH
+- Создан файл шаблона пакера Ubuntu16
+    - Создан образ виртуальной маштны
+    - Установлено и проверено приложение
+    - добавлены параметры в шаблон
+- Создан файл шаблона (с параиетрами) BAKE на основе предидущей вм
+    - установлено приложение
+    - добавлено в systemd
 
-```
-Host YcOtusInfra_bastion
-   HostName 62.84.122.247
-   User wargasm
-   IdentityFile ~/.ssh/yc_otus_rsa
-Host YcOtusInfra_internal
-   HostName 62.84.122.247
-   User wargasm
-   IdentityFile ~/.ssh/yc_otus_rsa
-   ForwardAgent yes
-   RequestTTY force
-   RemoteCommand ssh 10.129.0.35
-```
+> При разворачивании виртуальной машины из образа **reddit-full** получаем уже рабочее приложение
 
-``` $ ssh YcOtusInfra_internal ``` залогинит пользователя в интернал
+> ### Создание основного образа
+>`$ packer build -var-file='variables.json' ./ubuntu15.json`
 
-https://62-84-122-247.sslip.io/login
-```
-user: pritunl
-pass: Ve4PsbgD2a03
-```
-bastion_IP = 62.84.122.247
-
-someinternalhost_IP = 10.129.0.35
+> ### Создание запеченого образа с приложением (10.1*)
+> `$ packer build -var-file='packer/variables.json' ./packer/immutable.json`
