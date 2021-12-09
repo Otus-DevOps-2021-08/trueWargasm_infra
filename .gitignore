@@ -1,7 +1,7 @@
 variables.json
 .DS_Store
 workspace.code-workspace
-
+terraform2
 *.tfstate
 *.tfstate.*.backup
 *.tfstate.backup
