@@ -6,7 +6,7 @@ provider "yandex" {
 }
 
 module "db" {
-  source          = "../modules/db"
+  source          = "./modules/db"
   public_key_path = var.public_key_path
   privat_key_path = var.privat_key_path
   db_disk_image   = var.db_disk_image
@@ -14,7 +14,7 @@ module "db" {
 }
 
 module "app" {
-  source          = "../modules/app"
+  source          = "./modules/app"
   public_key_path = var.public_key_path
   privat_key_path = var.privat_key_path
   app_disk_image  = var.app_disk_image
