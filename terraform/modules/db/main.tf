@@ -23,4 +23,11 @@ resource "yandex_compute_instance" "db" {
   metadata = {
     ssh-keys = "ubuntu:${file(var.public_key_path)}"
   }
+
+  connection {
+    type     = "ssh"
+    user     = "ubuntu"
+    private_key  = file(var.privat_key_path)
+    host     = self.network_interface.0.nat_ip_address
+  }
 }

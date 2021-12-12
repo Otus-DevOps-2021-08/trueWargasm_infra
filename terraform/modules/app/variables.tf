@@ -8,3 +8,13 @@ variable app_disk_image {
 variable subnet_id {
 description = "Subnets for modules"
 }
+
+variable "privat_key_path" {
+  # Описание переменной
+  description = "Path to the private key used for ssh access"
+}
+
+variable database_url {
+
+  description = "Mongodb url"
+}
