@@ -5,8 +5,8 @@ Description=Puma HTTP Server
 After=network.target
 
 [Service]
-Environments="DATABASE_URL=$DATABASE_URL"
-Type=notify
+Environment="DATABASE_URL=$DATABASE_URL"
+Type=simple
 WatchdogSec=10
 WorkingDirectory=/redditapp/reddit
 ExecStart=/usr/local/bin/puma --dir /redditapp/reddit/
