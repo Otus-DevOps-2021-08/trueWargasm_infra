@@ -9,4 +9,4 @@ service_account_key_file = "../../key.json"
 vm_zone                  = "ru-central1-a"
 resources_count          = 1
 app_disk_image           = "fd870fcc9cd9k95j022m"
-db_disk_image            = "fd8q1ngs5hkjs2jssbab"
+db_disk_image            = "fd8m2jten99c2iar9m40"

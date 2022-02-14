@@ -1,0 +1,8 @@
+all:
+  children:
+    reddit_servers:
+      hosts:
+        app:
+          ansible_host: 51.250.13.185
+        db:
+          ansible_host: 51.250.8.6

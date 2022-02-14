@@ -11,5 +11,6 @@ sleep 30
 echo "wake"
 echo "apt install -y mongodb-org"
 apt install -y mongodb-org
+sudo sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
 systemctl start mongod
 systemctl enable mongod
